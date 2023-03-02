@@ -1,0 +1,11 @@
+{
+    "name": "testone-complexity-plugin",
+    "version": "0.0.1",
+    "main": "index.js",
+    "repository": "git@github.com:fedeghe/testone-complexity-plugin.git",
+    "author": "fedeghe <fedeghe@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+        "plato": "^1.7.0"
+    }
+}
