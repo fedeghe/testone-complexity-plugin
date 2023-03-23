@@ -1,6 +1,6 @@
 {
     "name": "testone-complexity-plugin",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "main": "index.js",
     "repository": "git@github.com:fedeghe/testone-complexity-plugin.git",
     "author": "fedeghe <fedeghe@gmail.com>",

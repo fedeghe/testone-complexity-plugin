@@ -13,7 +13,11 @@ const testone = require('@fedeghe/testone'),
     tcp = require('testone-complexity-plugin')
 
 const pow1 = (a, b) => a ** b,
-    pow2 = (a, b) => Math.pow(a, b)
+    pow2 = (a, b) => Math.pow(a, b),
+    pow3 = (a, b, r = 1) => {
+      while(b--) r *= a;
+      return r;
+    };
 
 const benchmarks = [{
     in: [2, 10],
@@ -21,16 +25,19 @@ const benchmarks = [{
 }, {
     in: [2, 30],
     out: 1073741824
+},{
+    in: [2, 40],
+    out: () => 2**40
 }]
-const strategies = [pow1, pow2];
+const strategies = [pow1, pow2, pow3];
 
 // then in the the micro test options use
 // the plugin and consume in metrics
 testone(benchmarks, strategies, {
     plugins: [{
         fn: tcp,
-        options // ***,
-        skipReport: true // by default is false
+        options: {}, // ***,
+        skipReport: true, // by default is false
                          // if true instead result.pluginsResults
                          // will always include the full plugin
                          // output grouped by strategy
@@ -47,11 +54,13 @@ testone(benchmarks, strategies, {
             // results for each strategy, and all metrics will be
             // computed for each strategy and returned into
             // result.metrics
+            return time.single * mem.single;
         },
         myComplexityInfo: ({
                 pluginsResults: {
                     /**
                      * this `cmplx` corresponds to the resultsLabel specified value
+                     * setting the plugin
                      * if not given one should use `complexity` (quite hidden) and not `tpc`
                      * thus the named `tcp` chosen importing it does not matter
                      **/
@@ -87,10 +96,11 @@ testone(benchmarks, strategies, {
                 mem: 2458.808
             },
             pow2: {
-                cyclomatic: 2,
-                difficulty: 10.125,
-                mem: 6230.696
+                ...
             },
+            pow3: {
+                ...
+            }
         }
     }*/ 
 
