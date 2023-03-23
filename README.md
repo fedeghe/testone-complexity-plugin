@@ -34,6 +34,7 @@ testone(benchmarks, strategies, {
                          // if true instead result.pluginsResults
                          // will always include the full plugin
                          // output grouped by strategy
+        resultsLabel: 'cmplx'
 
     }],
     metrics: {
@@ -47,10 +48,15 @@ testone(benchmarks, strategies, {
             // computed for each strategy and returned into
             // result.metrics
         },
-        cmplx: ({
+        myComplexityInfo: ({
                 pluginsResults: {
-                    tcp: { /* this must match the named you */
-                        complexity: { /* choosed on import  */
+                    /**
+                     * this `cmplx` corresponds to the resultsLabel specified value
+                     * if not given one should use `complexity` (quite hidden) and not `tpc`
+                     * thus the named `tcp` chosen importing it does not matter
+                     **/
+                    cmplx: { // it contains what the plugin returns
+                        complexity: { 
                             methodAggregate:{
                                 cyclomatic,
                                 halstead: {
@@ -74,7 +80,7 @@ testone(benchmarks, strategies, {
     // and are clearly not the actual output for the pow1 & pow2
     // u see above 
     {
-        cmplx: {
+        myComplexityInfo: {
             pow1: {
                 cyclomatic: 2,
                 difficulty: 15,
